@@ -72,7 +72,7 @@ export default function HomePage() {
             href="/register"
             className="px-6 py-3 rounded-xl glass-panel text-foreground font-medium hover:bg-white/10 transition-all"
           >
-            Become an Instructor
+            Get Started Free
           </Link>
         </div>
 
