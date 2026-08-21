@@ -56,4 +56,16 @@ export type LMSInngestEvents = {
       courseTitle?: string;
     };
   };
+  "live/session-created": {
+    data: {
+      sessionId: string;
+      teacherId: string;
+      courseId: string;
+    };
+  };
+  "live/session-cancelled": {
+    data: {
+      sessionId: string;
+    };
+  };
 };

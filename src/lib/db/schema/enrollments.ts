@@ -22,6 +22,8 @@ export const enrollments = sqliteTable(
       .notNull(),
     enrolledAt: text("enrolled_at").$defaultFn(() => new Date().toISOString()),
     expiresAt: text("expires_at"),
+    certificateUrl: text("certificate_url"),
+    certIssuedAt: text("cert_issued_at"),
   },
   (table) => [
     index("idx_enrollments_user").on(table.userId),

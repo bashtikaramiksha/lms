@@ -1,9 +1,16 @@
 import { auth } from "@/lib/auth";
 import Link from "next/link";
-import { BookOpen, GraduationCap, Clock, Award, PlayCircle, LogOut } from "lucide-react";
+import { BookOpen, LogOut, Compass } from "lucide-react";
+import { DashboardPage } from "@/components/dashboard/DashboardPage";
+import { redirect } from "next/navigation";
+import { NotificationBell } from "@/components/shared/NotificationBell";
 
-export default async function StudentDashboardPage() {
+export default async function StudentDashboard() {
   const session = await auth();
+
+  if (!session?.user) {
+    redirect("/login?callbackUrl=/dashboard");
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -18,8 +25,25 @@ export default async function StudentDashboardPage() {
           </div>
 
           <div className="flex items-center gap-4">
+            <Link
+              href="/live-sessions"
+              className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 transition-all flex items-center gap-1.5"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+              </span>
+              Live Classes
+            </Link>
+            <Link
+              href="/"
+              className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-border bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-foreground transition-all flex items-center gap-1.5"
+            >
+              <Compass className="h-3.5 w-3.5" /> Browse Courses
+            </Link>
+            <NotificationBell />
             <span className="text-sm text-muted-foreground hidden sm:inline">
-              Welcome, <strong className="text-foreground">{session?.user?.name || "Student"}</strong>
+              Welcome, <strong className="text-foreground">{session.user.name || "Student"}</strong>
             </span>
             <Link
               href="/api/auth/signout"
@@ -36,57 +60,14 @@ export default async function StudentDashboardPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">My Learning</h1>
           <p className="text-muted-foreground mt-1">
-            Pick up where you left off or explore new courses.
+            Pick up where you left off, join upcoming live workshops, or review completed courses.
           </p>
         </div>
 
-        {/* Overview Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="glass-card p-6 rounded-2xl">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Enrolled Courses</span>
-              <BookOpen className="h-5 w-5 text-blue-400" />
-            </div>
-            <p className="text-3xl font-extrabold mt-3">0</p>
-            <p className="text-xs text-muted-foreground mt-1">Browse catalog to enroll</p>
-          </div>
-
-          <div className="glass-card p-6 rounded-2xl">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Hours Learned</span>
-              <Clock className="h-5 w-5 text-indigo-400" />
-            </div>
-            <p className="text-3xl font-extrabold mt-3">0.0</p>
-            <p className="text-xs text-muted-foreground mt-1">Study time tracked</p>
-          </div>
-
-          <div className="glass-card p-6 rounded-2xl">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Certificates</span>
-              <Award className="h-5 w-5 text-amber-400" />
-            </div>
-            <p className="text-3xl font-extrabold mt-3">0</p>
-            <p className="text-xs text-muted-foreground mt-1">Earned upon completion</p>
-          </div>
-        </div>
-
-        {/* Empty state for courses */}
-        <div className="glass-panel p-12 rounded-2xl text-center border border-dashed border-border/60">
-          <div className="h-12 w-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-4">
-            <GraduationCap className="h-6 w-6" />
-          </div>
-          <h3 className="text-lg font-bold">No Courses Enrolled Yet</h3>
-          <p className="text-sm text-muted-foreground max-w-md mx-auto mt-2 mb-6">
-            Explore our curated catalog of interactive courses, live workshops, and expert-led curriculum.
-          </p>
-          <Link
-            href="/"
-            className="px-6 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 text-sm inline-flex items-center gap-2 shadow-md shadow-blue-500/20"
-          >
-            <PlayCircle className="h-4 w-4" /> Browse Courses
-          </Link>
-        </div>
+        {/* Dynamic Client Dashboard */}
+        <DashboardPage />
       </main>
     </div>
   );
 }
+

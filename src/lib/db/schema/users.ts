@@ -24,6 +24,14 @@ export const users = sqliteTable(
     emailVerifyExpiresAt: text("email_verify_expires_at"), // ISO8601
     resetPasswordToken: text("reset_password_token"), // SHA-256 hash
     resetPasswordExpiresAt: text("reset_password_expires_at"), // ISO8601
+    // Wave 6 - Live Class OAuth tokens (encrypted at rest)
+    zoomAccessToken: text("zoom_access_token"),
+    zoomRefreshToken: text("zoom_refresh_token"),
+    zoomTokenExpiry: text("zoom_token_expiry"), // ISO 8601
+    zoomUserId: text("zoom_user_id"), // Zoom internal user ID / email
+    googleAccessToken: text("google_access_token"),
+    googleRefreshToken: text("google_refresh_token"),
+    googleTokenExpiry: text("google_token_expiry"), // ISO 8601
     createdAt: text("created_at").$defaultFn(() => new Date().toISOString()),
     updatedAt: text("updated_at").$defaultFn(() => new Date().toISOString()),
   },

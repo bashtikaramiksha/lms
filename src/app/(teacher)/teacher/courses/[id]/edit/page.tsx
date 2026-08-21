@@ -21,6 +21,7 @@ import {
   Archive,
   ExternalLink,
   ShieldAlert,
+  Video,
 } from "lucide-react";
 import CurriculumBuilder from "@/components/curriculum/curriculum-builder";
 
@@ -520,6 +521,15 @@ export default function EditCoursePage() {
           >
             <Send className="h-4 w-4" /> Publishing & Review
           </button>
+
+          <div className="ml-auto shrink-0">
+            <Link
+              href={`/teacher/courses/${courseId}/sessions/new`}
+              className="px-3.5 py-1.5 rounded-xl border border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 text-xs font-bold transition flex items-center gap-1.5 shadow-sm"
+            >
+              <Video className="h-3.5 w-3.5 text-indigo-400" /> Schedule Live Class
+            </Link>
+          </div>
         </div>
 
         {/* Tab 1: Course Details */}

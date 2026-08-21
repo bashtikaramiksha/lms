@@ -23,6 +23,12 @@ export default function HomePage() {
               Browse Courses
             </Link>
             <Link
+              href="/blog"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
+            >
+              Blog
+            </Link>
+            <Link
               href="/login"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
             >

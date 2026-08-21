@@ -35,6 +35,7 @@ export default async function AdminCouponsPage() {
               <Link href="/admin/dashboard" className="text-slate-400 hover:text-slate-200 transition">Users</Link>
               <Link href="/admin/coupons" className="text-indigo-400 font-bold">Coupons</Link>
               <Link href="/admin/payments" className="text-slate-400 hover:text-slate-200 transition">Transactions & Refunds</Link>
+              <Link href="/admin/blog" className="text-slate-400 hover:text-slate-200 transition">Blog & CMS</Link>
             </nav>
             <Link
               href="/api/auth/signout"

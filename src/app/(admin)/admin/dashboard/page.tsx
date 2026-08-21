@@ -41,6 +41,14 @@ export default async function AdminDashboardPage() {
           </div>
 
           <div className="flex items-center gap-4">
+            <nav className="flex items-center gap-3 text-xs font-semibold">
+              <Link href="/admin/dashboard" className="text-indigo-400 font-bold">Users</Link>
+              <Link href="/admin/coupons" className="text-slate-400 hover:text-slate-200 transition">Coupons</Link>
+              <Link href="/admin/payments" className="text-slate-400 hover:text-slate-200 transition">Transactions & Refunds</Link>
+              <Link href="/admin/blog" className="text-slate-400 hover:text-slate-200 transition">Blog</Link>
+              <Link href="/admin/cms" className="text-slate-400 hover:text-slate-200 transition">Pages CMS</Link>
+              <Link href="/admin/settings" className="text-slate-400 hover:text-slate-200 transition">Settings</Link>
+            </nav>
             <span className="text-sm text-muted-foreground hidden sm:inline">
               Superadmin: <strong className="text-foreground">{session?.user?.name || "Admin"}</strong>
             </span>

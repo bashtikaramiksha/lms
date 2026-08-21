@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { courseService } from "@/lib/services/course.service";
+import { seoService } from "@/lib/services/seo.service";
 import { CourseCurriculumAccordion } from "@/components/courses/course-curriculum-accordion";
 import { CartBadge } from "@/components/cart/cart-badge";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
@@ -70,38 +71,8 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
     notFound();
   }
 
-  // Schema.org Course Structured Data
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: course.title,
-    description: course.shortDesc || course.description || course.title,
-    provider: {
-      "@type": "Organization",
-      name: "LMS Platform",
-    },
-    author: {
-      "@type": "Person",
-      name: course.instructor.fullName || "Instructor",
-    },
-    ...(course.reviewCount > 0
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: course.avgRating.toFixed(1),
-            reviewCount: course.reviewCount,
-            bestRating: "5",
-            worstRating: "1",
-          },
-        }
-      : {}),
-    offers: {
-      "@type": "Offer",
-      price: course.discountPrice ?? course.price,
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-    },
-  };
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lms-platform.com";
+  const jsonLd = seoService.generateCourseJsonLd(course, siteUrl);
 
   const hasDiscount =
     course.discountPrice !== null &&

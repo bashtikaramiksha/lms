@@ -26,9 +26,14 @@ export const env = createEnv({
     RAZORPAY_KEY_ID: z.string().optional(),
     RAZORPAY_KEY_SECRET: z.string().optional(),
     RAZORPAY_WEBHOOK_SECRET: z.string().optional(),
+    TOKEN_ENCRYPTION_KEY: z.string().optional(),
+    ZOOM_CLIENT_ID: z.string().optional(),
+    ZOOM_CLIENT_SECRET: z.string().optional(),
+    NEXT_PUBLIC_SITE_URL: z.string().optional(),
   },
   client: {
     // Public client-side env vars (NEXT_PUBLIC_*)
+    NEXT_PUBLIC_SITE_URL: z.string().optional(),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -54,6 +59,10 @@ export const env = createEnv({
     RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID,
     RAZORPAY_KEY_SECRET: process.env.RAZORPAY_KEY_SECRET,
     RAZORPAY_WEBHOOK_SECRET: process.env.RAZORPAY_WEBHOOK_SECRET,
+    TOKEN_ENCRYPTION_KEY: process.env.TOKEN_ENCRYPTION_KEY,
+    ZOOM_CLIENT_ID: process.env.ZOOM_CLIENT_ID,
+    ZOOM_CLIENT_SECRET: process.env.ZOOM_CLIENT_SECRET,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   },
   skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
 });

@@ -58,6 +58,7 @@ export const courses = sqliteTable(
 );
 
 import { modules } from "./curriculum";
+import { reviews } from "./reviews";
 
 export const coursesRelations = relations(courses, ({ one, many }) => ({
   author: one(users, {
@@ -69,6 +70,7 @@ export const coursesRelations = relations(courses, ({ one, many }) => ({
     references: [categories.id],
   }),
   modules: many(modules),
+  reviews: many(reviews),
 }));
 
 export const categoriesRelations = relations(categories, ({ many }) => ({
