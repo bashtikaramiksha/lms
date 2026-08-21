@@ -7,10 +7,16 @@ import { seoService } from "@/lib/services/seo.service";
 import { BlogPostDetail } from "@/components/blog/BlogPostDetail";
 
 export const revalidate = 300; // ISR cache 300s
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const slugs = await blogPublicService.getPublishedSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const slugs = await blogPublicService.getPublishedSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch (err) {
+    console.warn("generateStaticParams fallback for blog:", err);
+    return [];
+  }
 }
 
 interface BlogPostPageProps {

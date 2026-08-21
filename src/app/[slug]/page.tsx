@@ -6,10 +6,16 @@ import { cmsService } from "@/lib/services/cms.service";
 import { BlockRenderer } from "@/components/cms/BlockRenderer/BlockRenderer";
 
 export const revalidate = 300; // ISR cache 300s
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const slugs = await cmsService.getPublishedPageSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const slugs = await cmsService.getPublishedPageSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch (err) {
+    console.warn("generateStaticParams fallback for cms:", err);
+    return [];
+  }
 }
 
 interface PublicCmsPageProps {
