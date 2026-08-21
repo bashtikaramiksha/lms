@@ -71,4 +71,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers,
   session: { strategy: "jwt" },
   secret: env.AUTH_SECRET,
+  // Required for Vercel/production deployments: trusts the HOST header set by the platform.
+  // Without this, NextAuth v5 rejects sign-in requests when AUTH_URL doesn't exactly match
+  // the deployment URL (e.g. preview deployments or custom domains).
+  trustHost: true,
 });
