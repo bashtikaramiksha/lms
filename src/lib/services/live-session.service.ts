@@ -167,7 +167,7 @@ export class LiveSessionService {
    */
   async getTeacherSessions(
     teacherId: string,
-    options: ListLiveSessionsQuery = { page: 1, limit: 20 }
+    options: Partial<ListLiveSessionsQuery> = {}
   ): Promise<{
     data: LiveSessionResponseDto[];
     meta: { total: number; page: number; limit: number; hasNext: boolean };

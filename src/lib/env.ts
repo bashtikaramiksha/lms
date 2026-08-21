@@ -29,7 +29,6 @@ export const env = createEnv({
     TOKEN_ENCRYPTION_KEY: z.string().optional(),
     ZOOM_CLIENT_ID: z.string().optional(),
     ZOOM_CLIENT_SECRET: z.string().optional(),
-    NEXT_PUBLIC_SITE_URL: z.string().optional(),
   },
   client: {
     // Public client-side env vars (NEXT_PUBLIC_*)
